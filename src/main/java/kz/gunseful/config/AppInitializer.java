@@ -1,31 +1,20 @@
 package kz.gunseful.config;
 
-import org.springframework.web.WebApplicationInitializer;
-import org.springframework.web.context.ContextLoaderListener;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;
-
-public class AppInitializer implements WebApplicationInitializer {
-    private static final String DISPATCHER_SERVLET_NAME = "dispatcher";
+public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+    @Override
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class[0];
+    }
 
     @Override
-    public void onStartup(ServletContext servletContext) {
-        AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-        // регистрируем конфигурацию созданую высше
-        ctx.register(WebConfig.class);
-        // добавляем в контекст слушателя с нашей конфигурацией
-        servletContext.addListener(new ContextLoaderListener(ctx));
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class[]{WebConfig.class};
+    }
 
-        ctx.setServletContext(servletContext);
-
-        // настраиваем маппинг Dispatcher Servlet-а
-        ServletRegistration.Dynamic servlet =
-                servletContext.addServlet(DISPATCHER_SERVLET_NAME, new DispatcherServlet(ctx));
-        servlet.addMapping("/");
-        servlet.setLoadOnStartup(1);
+    @Override
+    protected String[] getServletMappings() {
+        return new String[]{"/"};
     }
 }
