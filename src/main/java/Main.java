@@ -7,7 +7,8 @@ import java.util.Properties;
 
 public class Main {
     public static void main(String[] args) {
-        //DB test
+        //DataBase Connection test
+       
         String url = "jdbc:h2:C:/Users/ПК02/test/TEST.mv.db";
         String username = "sa";
         String password = "sa";
