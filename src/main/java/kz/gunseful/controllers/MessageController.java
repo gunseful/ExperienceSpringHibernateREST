@@ -1,14 +1,10 @@
 package kz.gunseful.controllers;
 
-import kz.gunseful.dao.MessageDao;
-import kz.gunseful.dao.MessageDaoImpl;
 import kz.gunseful.entity.Message;
-import kz.gunseful.exeptions.NotFoundExceptions;
+import kz.gunseful.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,38 +13,32 @@ import java.util.Map;
 public class MessageController {
 
     @Autowired
-    MessageDao messageDao;
+    MessageService messageService;
 
     @GetMapping
     public List<Map<String, String>> messagesList() {
-        List<Message> messageList = messageDao.allMessages();
-        List<Map<String, String>> messages = new ArrayList<>();
-        for (Message message : messageList
-        ) {
-            messages.add(new HashMap<String, String>() {{
-                put("id", String.valueOf(message.getId()));
-                put("text", message.getText());
-            }});
-        }
-        return messages;
+        return messageService.allMessages();
     }
 
     @GetMapping("{id}")
     public Map<String, String> getMessage(@PathVariable String id) {
-        Message message = messageDao.getMessageById(Integer.parseInt(id)).orElseThrow(NotFoundExceptions::new);
-        return new HashMap<String, String>() {{
-            put("id", String.valueOf(message.getId()));
-            put("text", message.getText());
-        }};
+        return messageService.getMessageById(Integer.parseInt(id));
     }
 
     @PostMapping
-    public String create(@RequestBody Map<String, String> message) {
-        System.out.println("hehe");
-        System.out.println(message.get("text"));
-        //todo FAIL
-//        messageDao.add(new Message(message.get("text")));
-        return "";
+    public Map<String, String> create(@RequestBody Map<String, String> message) {
+        messageService.add(new Message(message.get("text")));
+        return message;
     }
 
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable String id){
+        messageService.delete(Integer.parseInt(id));
+    }
+
+    @PutMapping("{id}")
+    public Map<String, String> update(@PathVariable String id, @RequestBody Map<String, String> message){
+        messageService.edit(Integer.parseInt(id), message);
+        return message;
+    }
 }

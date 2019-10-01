@@ -20,23 +20,33 @@ public class MessageDaoImpl implements MessageDao {
         this.sessionFactory = sessionFactory;
     }
 
-    @Transactional
     @Override
     public List<Message> allMessages() {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from Message").list();
     }
 
-    @Transactional
     @Override
     public Optional<Message> getMessageById(int id) {
         Session session = sessionFactory.getCurrentSession();
-        return (Optional<Message>) session.byId(Message.class).loadOptional(id);
+        return session.byId(Message.class).loadOptional(id);
     }
 
     @Override
     public void add(Message message) {
         Session session = sessionFactory.getCurrentSession();
-        session.persist(message);
+        session.save(message);
+    }
+
+    @Override
+    public void delete(Message message) {
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(message);
+    }
+
+    @Override
+    public void edit(Message message) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(message);
     }
 }

@@ -35,4 +35,12 @@ public class Message {
     public Message(String text) {
         this.text = text;
     }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                ", text='" + text + '\'' +
+                '}';
+    }
 }
