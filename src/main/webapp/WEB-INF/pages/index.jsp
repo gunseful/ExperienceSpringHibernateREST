@@ -5,7 +5,6 @@
 <head>
     <meta charset="UTF-8">
     <title>ToDo List</title>
-    <!-- версия для разработки, отображает полезные предупреждения в консоли -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
 </head>
@@ -16,7 +15,7 @@
     }
 </style>
 
-<h1>To Do List</h1>
+<h1>ToDo List</h1>
 
 
 
