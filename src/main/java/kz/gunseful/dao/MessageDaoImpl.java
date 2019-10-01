@@ -23,7 +23,7 @@ public class MessageDaoImpl implements MessageDao {
     @Override
     public List<Message> allMessages() {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from Message").list();
+        return session.createNamedQuery("Message.findAll", Message.class).getResultList();
     }
 
     @Override
