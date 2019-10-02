@@ -1,4 +1,4 @@
-package kz.gunseful.config;
+package com.gunseful.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 

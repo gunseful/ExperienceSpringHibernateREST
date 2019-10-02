@@ -1,4 +1,4 @@
-package kz.gunseful.controllers;
+package com.gunseful.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

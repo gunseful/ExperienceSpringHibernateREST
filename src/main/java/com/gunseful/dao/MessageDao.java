@@ -1,6 +1,6 @@
-package kz.gunseful.dao;
+package com.gunseful.dao;
 
-import kz.gunseful.entity.Message;
+import com.gunseful.entity.Message;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
