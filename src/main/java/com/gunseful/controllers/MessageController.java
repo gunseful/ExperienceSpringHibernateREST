@@ -38,8 +38,9 @@ public class MessageController {
 
     @PostMapping
     public MessageDto create(@RequestBody Map<String, String> message) {
-        messageService.add(new Message(message.get("text")));
-        return new MessageDto.MessageDtoBuilder().setText(message.get("text")).build();
+        Message msg = new Message(message.get("text"));
+        messageService.add(msg);
+        return messageConverter.toDto(msg);
     }
 
     @DeleteMapping("{id}")
