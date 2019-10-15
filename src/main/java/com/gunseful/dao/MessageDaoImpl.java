@@ -1,14 +1,13 @@
-package kz.gunseful.dao;
+package com.gunseful.dao;
 
-import kz.gunseful.entity.Message;
+import com.gunseful.entity.Message;
+import com.gunseful.exeptions.NotFoundExceptions;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class MessageDaoImpl implements MessageDao {
@@ -27,9 +26,9 @@ public class MessageDaoImpl implements MessageDao {
     }
 
     @Override
-    public Optional<Message> getMessageById(int id) {
+    public Message getMessageById(int id) {
         Session session = sessionFactory.getCurrentSession();
-        return session.byId(Message.class).loadOptional(id);
+        return session.byId(Message.class).loadOptional(id).orElseThrow(NotFoundExceptions::new);
     }
 
     @Override

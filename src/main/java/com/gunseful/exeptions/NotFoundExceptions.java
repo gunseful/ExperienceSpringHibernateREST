@@ -1,4 +1,4 @@
-package kz.gunseful.exeptions;
+package com.gunseful.exeptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
