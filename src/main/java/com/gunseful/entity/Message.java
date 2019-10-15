@@ -44,15 +44,6 @@ public class Message {
         this.text = text;
     }
 
-    @Override
-    public String toString() {
-        return "Message{" +
-                "id=" + id +
-                ", text='" + text + '\'' +
-                '}';
-    }
-
-    //todo Transient not applicable to type (probably idea means that inner class can't be annotated this)
     public static class MessageBuilder {
 
         @Transient
